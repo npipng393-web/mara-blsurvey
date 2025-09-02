@@ -101,15 +101,6 @@ export function DistrictManager() {
       setError(null);
 
       // Convert province name to province_id if needed
-      
-      // Convert province name to province_id if needed
-      const processedData = { ...data };
-      if (data.province_id && typeof data.province_id === "string") {
-        const selectedProvince = provinces.find(p => p.name === data.province_id);
-        if (selectedProvince) {
-          processedData.province_id = selectedProvince.id;
-        }
-      }
       const processedData = { ...data };
       if (data.province_id && typeof data.province_id === 'string') {
         const selectedProvince = provinces.find(p => p.name === data.province_id);
@@ -240,10 +231,7 @@ export function DistrictManager() {
         onSave={handleSave}
         title={editingDistrict ? 'Edit District' : 'Add District'}
         fields={getDistrictFormFields()}
-        initialData={editingDistrict ? {
-          ...editingDistrict,
-          province_id: provinces.find(p => p.id === editingDistrict.province_id)?.name || editingDistrict.province_id
-        } : {}}
+        initialData={editingDistrict || {}}
       />
     </div>
   );
